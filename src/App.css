@@ -1,8 +1,10 @@
 .App {
-  text-align: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
   color: #fff;
+}
+
+.App h2{
+  text-align: center;
 }
 
 article{
@@ -14,6 +16,7 @@ article{
   margin-right: auto;
   margin-top: 10px;
   color: #fff;
+  padding: 10px 15px
 }
 
 .form-container{
@@ -74,3 +77,31 @@ article{
   border-color: #fff
 }
 
+.form-container form select{
+    width: 98%;
+    padding: 5px 10px
+}
+
+.postCredit{
+  padding: 0 0 0 10px;
+}
+
+.posts-display-sec{
+  text-align: center;
+}
+
+.postslist-content{
+  text-align: justify;
+  text-justify: auto;
+}
+
+.reaction-btns-container{
+
+}
+
+.reactionButton{
+  background-color: gray;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}

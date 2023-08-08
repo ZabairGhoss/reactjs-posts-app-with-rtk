@@ -1,38 +1,43 @@
-import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postAdded } from "./postsSlice";
+import { selectAllUsers } from "../users/usersSlice";
 
 const AddPostsForm = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const dispatch = useDispatch();
+  const [userId, setUserId] = useState("");
+
+  const users = useSelector(selectAllUsers);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
+  const onAuthorChanged = (e) => setUserId(e.target.value);
 
   const onSavePostClicked = (e) => {
     e.preventDefault();
     if (title && content) {
-      dispatch(
-        postAdded({
-          id: nanoid(),
-          title,
-          content,
-        })
-      );
+      dispatch(postAdded(title, content, userId));
     }
 
     setTitle("");
     setContent("");
   };
 
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
+
+  const usersOptions = users.map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ));
+
   return (
     <section className="form-container">
-      <h2>Add a new Post</h2>
       <form>
         <fieldset>
-          <legend>Add Post:</legend>
+          <legend>Add New Post:</legend>
           <label htmlFor="postTitle">
             Post Title:
             <br />
@@ -45,6 +50,12 @@ const AddPostsForm = () => {
             />
           </label>
           <br />
+          <label>Author:</label>
+          <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
+            <option value={""}>Select Author</option>
+            {usersOptions}
+          </select>
+          <br />
           <label htmlFor="postContent">
             Post Content:
             <br />
@@ -55,7 +66,8 @@ const AddPostsForm = () => {
               onChange={onContentChanged}
             />
           </label>
-          <button type="submit" onClick={onSavePostClicked}>
+
+          <button type="submit" onClick={onSavePostClicked} disabled={!canSave}>
             Save Post
           </button>
         </fieldset>

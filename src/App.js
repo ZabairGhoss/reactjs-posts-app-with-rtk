@@ -1,12 +1,11 @@
 import './App.css';
-import AddPostsForm from './feature/AddPostsForm';
-import PostsList from './feature/PostsList';
+import AddPostsForm from './feature/posts/AddPostsForm';
+import PostsList from './feature/posts/PostsList';
 
 function App() {
   return (
     <div className="App">
     <h2>User Posting App</h2>
-
           <AddPostsForm />
           <PostsList />
     </div>
