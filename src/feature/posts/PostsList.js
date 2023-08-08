@@ -26,7 +26,7 @@ const PostsList = () => {
   return (
     <section>
       <h2 className="posts-display-sec">Posts</h2>
-      {renderedPosts}
+      {renderedPosts.length === 0 ? <div className="no-post-div">You dont have any post(s) added, Yet!</div> : renderedPosts}
     </section>
   );
 };
